@@ -372,8 +372,8 @@ export async function fetchFilteredOrders(query: string) {
       status: orders.status,
       total: orders.total ?? 0,
       product_info: orders.order_items ?? [],
-      region: orders.address ?? '',
-      city: orders.address ?? '',
+      region: orders.region ?? '',
+      city: orders.city ?? '',
       address: orders.address ?? '',
       remark: orders.remark,
     }));

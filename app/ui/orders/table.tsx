@@ -15,7 +15,7 @@ export default function OrdersTable({
   // customers: FormattedCustomersTable[];
   orders: any;
 }) {
-  const [selectedProduct, setSelectedProduct] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
 
   const openModal = (productName: any) => {
     setSelectedProduct(JSON.parse(productName));
@@ -71,9 +71,7 @@ export default function OrdersTable({
                       <div className="flex w-1/2 flex-col">
                         <p className="text-xs">Product Info</p>
                         <button
-                          onClick={() =>
-                            openModal(JSON.stringify(order.product_info))
-                          }
+                          onClick={() => openModal(JSON.stringify(order))}
                           className="text-lg text-orange-400 hover:text-orange-600 focus:outline-none"
                         >
                           <AiOutlineEye />
@@ -135,9 +133,7 @@ export default function OrdersTable({
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
                         <button
-                          onClick={() =>
-                            openModal(JSON.stringify(order.product_info))
-                          }
+                          onClick={() => openModal(JSON.stringify(order))}
                           className="text-lg text-orange-400 hover:text-orange-600 focus:outline-none"
                         >
                           <AiOutlineEye />
@@ -151,12 +147,25 @@ export default function OrdersTable({
           </div>
         </div>
       </div>
-      {selectedProduct && selectedProduct.length > 0 && (
+      {/* {selectedProduct && selectedProduct.length > 0 && ( */}
+      {selectedProduct && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="max-w-lg rounded-md bg-white p-8">
+            <h2 className="mb-4 text-xl font-semibold">User Info</h2>
+            <div className="grid gap-4">
+              <div className="rounded-md border p-4">
+                <p className="text-sm font-medium">
+                  Name: {selectedProduct.user_name}
+                </p>
+                <p className="text-sm">Address: {selectedProduct.address}</p>
+                <p className="text-sm">City: {selectedProduct.region}</p>
+                <p className="text-sm">Sub city: {selectedProduct.city}</p>
+                <p className="text-sm">Remark: {selectedProduct.remark}</p>
+              </div>
+            </div>
             <h2 className="mb-4 text-xl font-semibold">Product Details</h2>
             <div className="grid gap-4">
-              {selectedProduct.map((product: any) => (
+              {selectedProduct.product_info.map((product: any) => (
                 <div key={product.id} className="rounded-md border p-4">
                   <p className="text-sm font-medium">
                     Product Name: {product.product_name}
